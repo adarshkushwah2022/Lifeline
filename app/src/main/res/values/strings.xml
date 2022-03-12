@@ -1,3 +1,31 @@
 <resources>
-    <string name="app_name">MC Project</string>
+    <string name="app_name">MCproject</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="registration_successful">User has been registered</string>
+    <string name="verify_email_unsuccessful">Verification email unsent. Please try again</string>
+    <string name="verify_email_successful">Verification email sent. Verify and Login</string>
+    <string name="wrong_username_password">Wrong username or password</string>
+    <string name="email_unverified">Email unverified</string>
+
+
+    <string name="settings">Settings</string>
+    <string name="profile">Profile</string>
+    <string name="home">Home</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_user">Hello user</string>
+    <string name="donate_blood">Donate blood</string>
+    <string name="donate_plasma">Donate plasma</string>
+    <string name="oxygen_cylinder">Oxygen cylinder</string>
+    <string name="know_more">Know more</string>
+    <string name="nhelp_someone_and_be_a_part_of_their_happiness">\nHelp someone and be a part of their happiness</string>
+    <string name="edit_details">Edit Details</string>
+
 </resources>

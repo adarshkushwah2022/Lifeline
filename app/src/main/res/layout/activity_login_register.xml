@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#70CFD1DF"
+        tools:context=".LoginRegisterActivity">
+
+        <RelativeLayout
+            android:id="@+id/loginScreenheader"
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            app:layout_constraintBottom_toTopOf="@+id/left_shadow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/login_logo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#38c172"
+                android:padding="10dp"
+                android:src="@drawable/lifeline_logo"
+                tools:ignore="ImageContrastCheck"></ImageView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/left_shadow"
+            android:layout_width="220dp"
+            android:layout_height="520dp"
+            android:layout_marginBottom="101dp"
+            android:background="@drawable/shape_left_panel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/loginScreenheader"
+            app:layout_constraintTop_toBottomOf="@+id/loginScreenheader">
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/loginPanel"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/shadow_login"
+            android:orientation="vertical"
+            android:paddingLeft="50dp"
+            android:paddingTop="70dp"
+            android:paddingRight="50dp"
+            app:layout_constraintTop_toBottomOf="@id/loginScreenheader">
+
+            <EditText
+                android:id="@+id/edtTextLoginEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/email_icon"
+                android:hint="Email" />
+
+            <EditText
+                android:id="@+id/edtTextLoginPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/password_icon"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColorHint="#757575" />
+
+            <TextView
+                android:id="@+id/txtViewForgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="right"
+                android:text="Forgot Password"
+                android:textSize="16dp"></TextView>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="#38c172"
+            android:text="Login"
+            android:textColor="#CFD8DC"
+            app:layout_constraintBottom_toBottomOf="@+id/loginPanel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"></Button>
+        <TextView android:id="@+id/login_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="40dp"
+            app:layout_constraintTop_toTopOf="@id/loginPanel"
+            android:text="Login"
+            android:textColor="#38c172"
+            app:layout_constraintLeft_toLeftOf="parent">
+        </TextView>
+        <TextView android:id="@+id/txtViewSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginRight="40dp"
+            app:layout_constraintTop_toTopOf="@id/loginPanel"
+            android:text="Sign Up"
+            android:textColor="#38c172"
+            app:layout_constraintRight_toRightOf="parent">
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="20dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don't have an account?"
+                android:textSize="16sp"></TextView>
+
+            <TextView android:id="@+id/signup_text_view_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="SIGN UP?"
+                android:textColor="#039BE5"
+                android:textSize="20sp"></TextView>
+
+
+        </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

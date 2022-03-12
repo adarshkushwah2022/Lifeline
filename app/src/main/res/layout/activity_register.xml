@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#70CFD1DF"
+    tools:context=".RegisterActivity">
+
+    <RelativeLayout
+        android:id="@+id/loginScreenheader"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        app:layout_constraintBottom_toTopOf="@+id/left_shadow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/signup_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#38c172"
+            android:padding="10dp"
+            android:src="@drawable/lifeline_logo" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/left_shadow"
+        android:layout_width="250dp"
+        android:layout_height="520dp"
+        android:layout_marginLeft="170dp"
+        android:background="@drawable/shadow_right_panel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/loginScreenheader">
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/loginPanel"
+        android:layout_width="0dp"
+        android:layout_height="460dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/shadow_login"
+        android:orientation="vertical"
+        android:paddingLeft="50dp"
+        android:paddingTop="70dp"
+        android:paddingRight="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginScreenheader">
+
+        <EditText
+            android:id="@+id/edtTextUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/user_icon"
+            android:hint="Username" />
+
+        <EditText
+            android:id="@+id/edtTextLoginEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/email_icon"
+            android:hint="Email" />
+
+        <EditText
+            android:id="@+id/edtTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/password_icon"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColorHint="#757575" />
+
+        <EditText
+            android:id="@+id/edtTextConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/password_icon"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:textColorHint="#757575" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="#38c172"
+        android:text="Sign Up"
+        app:layout_constraintBottom_toBottomOf="@+id/loginPanel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/Login_in_activity_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintTop_toTopOf="@id/loginPanel"
+        android:text="Login"
+        android:textColor="#38c172"
+        app:layout_constraintLeft_toLeftOf="parent">
+    </TextView>
+
+    <TextView
+        android:id="@+id/signup_in_activity_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginRight="40dp"
+        app:layout_constraintTop_toTopOf="@id/loginPanel"
+        android:text="Sign Up"
+        android:textColor="#38c172"
+        app:layout_constraintRight_toRightOf="parent">
+    </TextView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -4,15 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#38c172"
     tools:context=".MainActivity">
 
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/back_animation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/back_animation"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-199dp" />
+
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="293dp"
+        android:layout_height="197dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/lifeline_logo"
+        app:layout_constraintBottom_toTopOf="@+id/startScreenTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
+        android:id="@+id/startScreenTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginBottom="64dp"
+        android:fontFamily="@font/anonymous_pro_bold_italic"
+        android:text="Lifeline"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/loading_animation_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading_animation_view"
+        android:layout_width="223dp"
+        android:layout_height="215dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginEnd="83dp"
+        android:layout_marginBottom="48dp"
+        android:foregroundGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/loading"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
