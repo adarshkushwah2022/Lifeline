@@ -27,5 +27,8 @@
     <string name="know_more">Know more</string>
     <string name="nhelp_someone_and_be_a_part_of_their_happiness">\nHelp someone and be a part of their happiness</string>
     <string name="edit_details">Edit Details</string>
-
+    <string name="developers_details">Adarsh Singh Kushwah  (adarsh21111@iiitd.ac.in)\nAkash Rawat           (akash21005@iiid.ac.in)\nCharisha Phirani      (charisha21117@iiitd.ac.in)\nDhiraj Prakash Jain   (dhiraj21030@iiitd.ac.in)\nShubham Rana          (shubham21092@iiitd.ac.in)\n</string>
+    <string name="about_developers">  About developers</string>
+    <string name="app_detailing">Lifeline is an android application for urgent medical help such as blood, plasma, medical aids, etc. It also connects people willing to help others in medical assistance in their nearby location. During Covid-19, there was a massive shortage of medical aids. There was a lack of communication between the people who needed medical assistance and those who were there to help. It was difficult for people to reach out for help when they needed plasma/blood/oxygen etc. So, the Lifeline app provides a platform to solve and overcome such issues. The application offers secure and encrypted authentication for the user registration using the firebase authentication technology, built by the same team who developed google sign-in. The application provides a user-friendly interface for interacting with the user function such as blood and plasma need, self-assessment test for the covid-19, gaining some details about the medical field scenario in India. The application connects the users through the google maps API, which helps users track location distance to provide needed help on time. Lifeline aims to build a communication channel and a reliable platform for delivering medical aids to patients.\n</string>
+    <string name="about_lifeLine">  About Lifeline</string>
 </resources>
