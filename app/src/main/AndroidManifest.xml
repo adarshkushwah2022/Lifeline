@@ -19,6 +19,7 @@
 
         <activity
             android:name=".mainMenuActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false" />
 
         <activity
