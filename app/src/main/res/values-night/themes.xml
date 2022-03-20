@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.MCproject" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#38c172</item>
-        <item name="colorPrimaryVariant">#38c172</item>
+        <item name="colorPrimary">#FF0099CC</item>
+        <item name="colorPrimaryVariant">#FF0099CC</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

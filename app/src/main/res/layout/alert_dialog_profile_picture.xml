@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/grad"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/imageViewADPPCamera"
+        android:layout_width="180dp"
+        android:layout_height="150dp"
+        android:src="@drawable/camera_icon" />
+
+    <ImageView
+        android:id="@+id/imageViewADPPGallery"
+        android:layout_width="180dp"
+        android:layout_height="150dp"
+        android:src="@drawable/gallery_icon" />
+</LinearLayout>

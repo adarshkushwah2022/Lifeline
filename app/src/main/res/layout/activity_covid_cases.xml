@@ -1,28 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/relativeLayout"
+    android:orientation="vertical"
     tools:context=".CovidCasesActivity">
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/covid19"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="138dp"
-        android:layout_marginLeft="7sp"
-        app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/covid_19_lottie"
-        app:lottie_repeatCount="1000" />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/horizontalTow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/grad">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_weight="1"
+                android:text="Covid 19 Statistics"
+                android:textAlignment="textEnd"
+                android:textColor="#F5F6F2"
+                android:textSize="29sp"
+                android:textStyle="bold|italic" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/covid19"
+                android:layout_width="150dp"
+                android:layout_height="138dp"
+                android:layout_marginLeft="7sp"
+                app:lottie_autoPlay="true"
+                app:lottie_rawRes="@raw/covid_19_lottie"
+                app:lottie_repeatCount="1000" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
-        android:layout_below="@+id/covid19"></androidx.recyclerview.widget.RecyclerView>
-</RelativeLayout>
+        android:layout_marginBottom="7dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
