@@ -1,19 +1,20 @@
 package com.example.mcproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +23,8 @@ import com.daimajia.androidanimations.library.YoYo;
  */
 public class homeScreen extends Fragment {
     TextView tv;
-    CardView knowMore;
+    CardView knowMore,bloodDonate,plasmaDonate,oxygenCylinderDonate,covidStats;
+    LinearLayout linearLayout;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -69,6 +71,11 @@ public class homeScreen extends Fragment {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_home_screen, container, false);
         knowMore = view.findViewById(R.id.cardView5);
+        bloodDonate = view.findViewById(R.id.HomeScreenCardView2);
+        plasmaDonate = view.findViewById(R.id.HomeScreenCardView1);
+        oxygenCylinderDonate = view.findViewById(R.id.HomeScreenCardView4);
+        covidStats= view.findViewById(R.id.homeScreenCardView8);
+
         knowMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +87,48 @@ public class homeScreen extends Fragment {
             }
         });
 
+        bloodDonate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.mainMenuContainer,new Blood_donation())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        plasmaDonate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.mainMenuContainer,new Plasma_Donation())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        oxygenCylinderDonate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.mainMenuContainer,new Oxygen_Cylinder_donation())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        covidStats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getActivity(),CovidCasesActivity.class);
+                startActivity(i);
+            }
+        });
+
         return view;
     }
+
 }
