@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/homeScreenParentLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".homeScreen">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/txtViewGreeting"
                 android:layout_width="match_parent"
                 android:layout_height="101dp"
                 android:background="@drawable/header"
                 android:gravity="center"
-                android:text="@string/hello_user"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="40dp"
@@ -30,7 +28,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +44,7 @@
 
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/HomeScreenCardView2"
+                        android:id="@+id/cardView2"
                         android:layout_width="189dp"
                         android:layout_height="207dp"
                         android:layout_marginLeft="5sp"
@@ -60,7 +58,7 @@
 
 
                         <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/homeScreenblood"
+                            android:id="@+id/blood"
                             android:layout_width="match_parent"
                             android:layout_height="138dp"
                             android:layout_marginLeft="7sp"
@@ -84,7 +82,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/HomeScreenCardView1"
+                        android:id="@+id/cardView1"
                         android:layout_width="189dp"
                         android:layout_height="207dp"
                         android:layout_marginLeft="5sp"
@@ -98,7 +96,7 @@
 
 
                         <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/homeScreenplasma"
+                            android:id="@+id/plasma"
                             android:layout_width="match_parent"
                             android:layout_height="134dp"
                             android:layout_marginLeft="7sp"
@@ -129,7 +127,7 @@
 
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/HomeScreenCardView4"
+                        android:id="@+id/cardView4"
                         android:layout_width="189dp"
                         android:layout_height="207dp"
                         android:layout_marginLeft="5sp"
@@ -142,7 +140,7 @@
                         app:cardUseCompatPadding="true">
 
                         <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/homeScreenOxygen"
+                            android:id="@+id/oxygen"
                             android:layout_width="match_parent"
                             android:layout_height="131dp"
                             android:layout_marginLeft="7sp"
@@ -199,94 +197,13 @@
                             android:textStyle="italic|bold" />
                     </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView7"
-                        android:layout_width="189dp"
-                        android:layout_height="207dp"
-                        android:layout_marginLeft="5sp"
-                        android:layout_weight="2"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="10dp"
-                        app:cardMaxElevation="12dp"
-                        app:cardPreventCornerOverlap="true"
-                        app:cardUseCompatPadding="true">
-
-                        <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/covidtest"
-                            android:layout_width="match_parent"
-                            android:layout_height="131dp"
-                            android:layout_marginLeft="7sp"
-                            app:lottie_autoPlay="true"
-                            app:lottie_rawRes="@raw/covid_test"
-                            app:lottie_repeatCount="10" />
-
-                        <TextView
-                            android:id="@+id/textView7"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|center"
-                            android:background="@drawable/background"
-                            android:text="@string/covid_test"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="16sp"
-                            android:textStyle="italic|bold" />
-                    </androidx.cardview.widget.CardView>
-
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/homeScreenCardView8"
-                        android:layout_width="189dp"
-                        android:layout_height="207dp"
-                        android:layout_marginLeft="5sp"
-                        android:layout_weight="2"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="10dp"
-                        app:cardMaxElevation="12dp"
-                        app:cardPreventCornerOverlap="true"
-                        app:cardUseCompatPadding="true">
-
-                        <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/stat"
-                            android:layout_width="match_parent"
-                            android:layout_height="131dp"
-                            android:layout_marginLeft="7sp"
-                            app:lottie_autoPlay="true"
-                            app:lottie_rawRes="@raw/statistics"
-                            app:lottie_repeatMode="restart" />
-
-                        <TextView
-                            android:id="@+id/textView8"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|center"
-                            android:background="@drawable/background"
-                            android:text="@string/get_statistics"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="16sp"
-                            android:textStyle="italic|bold" />
-                    </androidx.cardview.widget.CardView>
-
 
                 </LinearLayout>
-
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/nhelp_someone_and_be_a_part_of_their_happiness"
                     android:textAlignment="center"
@@ -296,8 +213,6 @@
 
 
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -6,6 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -39,6 +42,16 @@ public class LoginRegisterActivity extends AppCompatActivity implements View.OnC
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
     private EditText edtTextEmail, edtTextPassword;
+    private SharedPreferences sharedPreferences;
+    private static final String SHARED_PREF_NAME = "MCpref";
+    private static final String KEY_UID = "UID";
+    private static final String KEY_USERNAME = "USERNAME";
+    private static final String KEY_FULLNAME = "FULLNAME";
+    private static final String KEY_CONTACT = "CONTACTNO";
+    private static final String KEY_BLOODGROUP = "BLOODGROUP";
+    private static final String KEY_ADDRESS = "ADDRESS";
+    private static final String KEY_PINCODE = "PINCODE";
+    private ConnectivityManager connectivityManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +61,7 @@ public class LoginRegisterActivity extends AppCompatActivity implements View.OnC
         signup_second = findViewById(R.id.signup_text_view_1);
         signup.setOnClickListener(this);
         signup_second.setOnClickListener(this);
-
+        connectivityManager = (ConnectivityManager)getSystemService(LoginRegisterActivity.CONNECTIVITY_SERVICE);
         login_logo = (ImageView)findViewById(R.id.login_logo);
 
         leftAnim = AnimationUtils.loadAnimation(this, R.anim.left_animation);
@@ -62,7 +75,7 @@ public class LoginRegisterActivity extends AppCompatActivity implements View.OnC
         edtTextPassword = findViewById(R.id.edtTextLoginPassword);
         progressBar = findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
-
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
     }
 
     @Override
@@ -74,7 +87,14 @@ public class LoginRegisterActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.btnLogin:
                 progressBar.setVisibility(View.VISIBLE);
-                login();
+                NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()){
+                    login();
+                }
+                else{
+                    progressBar.setVisibility(GONE);
+                    Toast.makeText(LoginRegisterActivity.this, R.string.network_unavailable, Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -124,18 +144,27 @@ public class LoginRegisterActivity extends AppCompatActivity implements View.OnC
 
     private void checkIfEmailVerified()
     {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = mAuth.getCurrentUser();
 
         if (user.isEmailVerified())
         {
-            String uid = mAuth.getCurrentUser().getUid();
+            String uid = user.getUid();
             FirebaseDatabase.getInstance().getReference("Users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     User user = dataSnapshot.getValue(User.class);
-//                    Toast.makeText(LoginRegisterActivity.this, user.getUsername(),Toast.LENGTH_SHORT).show();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(KEY_UID, uid);
+                    editor.putString(KEY_USERNAME, user.getUsername());
+                    editor.putString(KEY_FULLNAME, user.getFullname());
+                    editor.putString(KEY_CONTACT, user.getContactNumber());
+                    editor.putString(KEY_BLOODGROUP, user.getBloodGroup());
+                    editor.putString(KEY_ADDRESS, user.getAddress());
+                    editor.putString(KEY_PINCODE, user.getPincode());
+                    editor.apply();
                     progressBar.setVisibility(GONE);
                     Intent intent = new Intent(LoginRegisterActivity.this, mainMenuActivity.class);
+                    intent.putExtra(KEY_UID,uid);
                     startActivity(intent);
                     finish();
                 }

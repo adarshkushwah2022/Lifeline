@@ -1,2 +1,2 @@
-# Mobile-Computing-Project
+# Mobile-Computig-Project
 Mobile Computing Course Project

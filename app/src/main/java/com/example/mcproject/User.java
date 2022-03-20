@@ -4,6 +4,11 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private String fullname;
+    private String contactNumber;
+    private String bloodGroup;
+    private String address;
+    private String pincode;
 
     public User(){
 
@@ -12,6 +17,51 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.fullname = null;
+        this.contactNumber = null;
+        this.bloodGroup = null;
+        this.address = null;
+        this.pincode = null;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
     }
 
     public String getUsername() {

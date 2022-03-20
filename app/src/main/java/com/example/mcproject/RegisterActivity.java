@@ -154,6 +154,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                                         FirebaseAuth.getInstance().signOut();
                                                         Intent intent = new Intent(RegisterActivity.this,LoginRegisterActivity.class);
                                                         RegisterActivity.this.startActivity(intent);
+                                                        finish();
                                                     }
                                                 });
                                             }else{
