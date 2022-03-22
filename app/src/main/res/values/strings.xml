@@ -12,7 +12,7 @@
     <string name="registration_successful">User has been registered</string>
     <string name="verify_email_unsuccessful">Verification email unsent. Please try again</string>
     <string name="verify_email_successful">Verification email sent. Verify and Login</string>
-    <string name="wrong_username_password">Wrong username or password</string>
+    <string name="wrong_username_password">Wrong email or password</string>
     <string name="email_unverified">Email unverified</string>
 
 
@@ -71,4 +71,9 @@
     <string name="clear1">CLEAR</string>
     <string name="submit2">SUBMIT</string>
     <string name="clear2">CLEAR</string>
+
+    <string name="save_details">Save Details</string>
+    <string name="network_unavailable">No network available</string>
+    <string name="wrong_email">Please enter correct email</string>
+    <string name="password_email_successful">Reset password email sent. Check your email.</string>
 </resources>

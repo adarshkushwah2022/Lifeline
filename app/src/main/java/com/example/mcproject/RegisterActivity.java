@@ -154,10 +154,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                                         FirebaseAuth.getInstance().signOut();
                                                         Intent intent = new Intent(RegisterActivity.this,LoginRegisterActivity.class);
                                                         RegisterActivity.this.startActivity(intent);
+                                                        finish();
                                                     }
                                                 });
                                             }else{
                                                 Toast.makeText(RegisterActivity.this, R.string.verify_email_unsuccessful , Toast.LENGTH_SHORT).show();
+                                                finish();
+                                                startActivity(getIntent());
                                             }
                                         }
                                     });

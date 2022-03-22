@@ -37,7 +37,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/profileScreenMainName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -79,7 +79,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="Enter User Name"
+                    android:hint="Enter Full Name"
                     android:inputType="textPersonName"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -149,7 +149,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="*Required"
+                    android:hint="Enter Blood Group"
                     android:inputType="textPersonName"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -223,10 +223,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="*Required"
+                    android:hint="Enter Pincode"
                     android:inputType="textPersonName"
                     android:textSize="20sp"
-                    tools:ignore="DuplicateIds" />
+                    tools:ignore="DuplicateIds"
+                    android:enabled="false"/>
 
             </LinearLayout>
 
@@ -241,7 +242,31 @@
                 android:text="@string/edit_details"
                 android:textSize="18sp"
                 tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/profileScreenSignOutButton"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/button_style"
+                android:drawableLeft="@drawable/ic__logout"
+                android:clickable="true"
+                android:text="Sign Out"
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
         </LinearLayout>
     </ScrollView>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,8 @@
 package com.example.mcproject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -25,6 +27,9 @@ public class homeScreen extends Fragment {
     TextView tv;
     CardView knowMore,bloodDonate,plasmaDonate,oxygenCylinderDonate,covidStats;
     LinearLayout linearLayout;
+    private static final String SHARED_PREF_NAME = "MCpref";
+    private static final String KEY_UID = "UID";
+    private static final String KEY_USERNAME = "USERNAME";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,6 +38,10 @@ public class homeScreen extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String uid, username;
+    private SharedPreferences sharedPreferences;
+    private  TextView txtViewGreeting;
+
 
     public homeScreen() {
         // Required empty public constructor
@@ -68,6 +77,8 @@ public class homeScreen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        username = sharedPreferences.getString(KEY_USERNAME,null);
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_home_screen, container, false);
         knowMore = view.findViewById(R.id.homeScreenCardView8);
@@ -75,7 +86,8 @@ public class homeScreen extends Fragment {
         plasmaDonate = view.findViewById(R.id.HomeScreenCardView1);
         oxygenCylinderDonate = view.findViewById(R.id.HomeScreenCardView4);
         covidStats= view.findViewById(R.id.cardView5);
-
+        txtViewGreeting = view.findViewById(R.id.txtViewGreeting);
+        txtViewGreeting.setText("Welcome, " + username);
         knowMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

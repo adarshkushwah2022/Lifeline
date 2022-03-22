@@ -18,6 +18,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/txtViewGreeting"
                 android:layout_width="match_parent"
                 android:layout_height="101dp"
                 android:background="@drawable/header"
