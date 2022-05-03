@@ -25,10 +25,10 @@
                 android:id="@+id/login_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#38c172"
+                android:background="@drawable/grad"
                 android:padding="10dp"
                 android:src="@drawable/lifeline_logo"
-                tools:ignore="ImageContrastCheck"/>
+                tools:ignore="ImageContrastCheck" />
 
         </RelativeLayout>
 

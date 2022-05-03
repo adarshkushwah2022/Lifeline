@@ -173,6 +173,8 @@ public class profileScreen extends Fragment {
                 editor.apply();
                 Intent intent = new Intent(getActivity(), LoginRegisterActivity.class);
                 startActivity(intent);
+                getActivity().finish();
+
             }
         });
         profileScreenAddress.setOnClickListener(new View.OnClickListener() {
@@ -337,8 +339,9 @@ public class profileScreen extends Fragment {
         if(requestCode == 20 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
             takePictureFromCamera();
         }
-        else
-            Toast.makeText(getContext(), "Camera Permission not Granted", Toast.LENGTH_SHORT).show();
+        else {
+//            Toast.makeText(getContext(), "Camera Permission not Granted", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setImageInMenu(){

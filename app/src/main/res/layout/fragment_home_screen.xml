@@ -229,7 +229,7 @@
                             android:layout_marginLeft="7sp"
                             app:lottie_autoPlay="true"
                             app:lottie_rawRes="@raw/covid_test"
-                            app:lottie_repeatCount="10" />
+                            app:lottie_repeatMode="restart" />
 
                         <TextView
                             android:id="@+id/textView7"

@@ -18,16 +18,27 @@
         android:theme="@style/Theme.MCproject">
         <activity
             android:name=".CovidCasesActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:exported="false" />
         <activity
             android:name=".LoginRegisterActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:exported="false" />
+        <activity
+            android:name=".C19_SelfAssessmentResult"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:exported="false" />
+        <activity
+            android:name=".C19_SelfAssessment"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:exported="false" />
         <activity
             android:name=".mainMenuActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -25,7 +25,7 @@ import android.widget.Toast;
  */
 public class homeScreen extends Fragment {
     TextView tv;
-    CardView knowMore,bloodDonate,plasmaDonate,oxygenCylinderDonate,covidStats;
+    CardView knowMore,bloodDonate,plasmaDonate,oxygenCylinderDonate,covidStats, selfAssessment;
     LinearLayout linearLayout;
     private static final String SHARED_PREF_NAME = "MCpref";
     private static final String KEY_UID = "UID";
@@ -86,6 +86,7 @@ public class homeScreen extends Fragment {
         plasmaDonate = view.findViewById(R.id.HomeScreenCardView1);
         oxygenCylinderDonate = view.findViewById(R.id.HomeScreenCardView4);
         covidStats= view.findViewById(R.id.cardView5);
+        selfAssessment = view.findViewById(R.id.cardView7);
         txtViewGreeting = view.findViewById(R.id.txtViewGreeting);
         txtViewGreeting.setText("Welcome, " + username);
         knowMore.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +137,14 @@ public class homeScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(getActivity(),CovidCasesActivity.class);
+                startActivity(i);
+            }
+        });
+
+        selfAssessment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getActivity(),C19_SelfAssessment.class);
                 startActivity(i);
             }
         });

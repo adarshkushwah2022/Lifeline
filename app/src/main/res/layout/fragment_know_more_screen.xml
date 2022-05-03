@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="serif"
                 android:text=" About Lifeline"
+                android:textAlignment="center"
                 android:textColor="#6200EA"
                 android:textSize="26sp"
                 android:textStyle="bold" />
@@ -40,9 +41,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="@string/app_detailing"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textColor="#040404"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/knowMoreScreenTextView2"
@@ -50,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="serif"
                 android:text=" About Developers"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textColor="#6200EA"
                 android:textSize="26sp"
                 android:textStyle="bold" />
@@ -71,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:drawableStart="@drawable/copyright_logo"
-                android:text=" Copyright 2022 by Team Lifeline"
+                android:text=" Copyright 2022 by Team Ideal Bytes"
                 android:textAlignment="center"
                 android:textColor="#070707"
                 android:textSize="18sp" />

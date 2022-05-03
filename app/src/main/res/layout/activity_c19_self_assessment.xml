@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".C19_SelfAssessment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".C19_SelfAssessment">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_border"
+            android:fontFamily="sans-serif"
+            android:shadowColor="#FFFFFF"
+            android:text="Covid19 Self Assessment \nPlease Mark YES if you have following Symptom"
+            android:textAlignment="center"
+            android:textColor="#45374A"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/sa_symptom_anim"
+            android:layout_width="270dp"
+            android:layout_height="195dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/sa_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/symptom_0"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/sa_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="232dp"
+            android:background="@drawable/rounded_border"
+            android:fontFamily="sans-serif"
+            android:shadowColor="#FFFFFF"
+            android:text="FEVER"
+            android:textAlignment="center"
+            android:textColor="#45374A"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <RadioGroup
+            android:id="@+id/yes_no_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/sa_textview"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="0dp">
+
+
+            <RadioButton
+                android:id="@+id/radioButton_yes"
+                android:layout_width="149dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="YES"
+                android:textColor="#000000"
+                android:textStyle="bold|italic" />
+
+            <RadioButton
+                android:id="@+id/radioButton_no"
+                android:layout_width="158dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:checked="true"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="NO"
+                android:textColor="#000000"
+                android:textStyle="bold|italic" />
+
+        </RadioGroup>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/next_btn"
+            android:layout_width="149dp"
+            android:layout_height="78dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yes_no_radio"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/sa_next"
+            tools:ignore="MissingConstraints" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>

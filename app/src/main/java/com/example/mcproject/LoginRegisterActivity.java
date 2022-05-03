@@ -84,6 +84,7 @@ public class LoginRegisterActivity extends AppCompatActivity implements View.OnC
             case R.id.txtViewSignUp:
                 Intent intent = new Intent(LoginRegisterActivity.this, RegisterActivity.class);
                 LoginRegisterActivity.this.startActivity(intent);
+                finish();
                 break;
             case R.id.btnLogin:
                 progressBar.setVisibility(View.VISIBLE);

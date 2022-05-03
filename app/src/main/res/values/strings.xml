@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MCproject</string>
+    <string name="app_name">Lifeline</string>
     <string name="title_activity_register">RegisterActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -38,7 +38,7 @@
     <string name="oxygen_cylinder1">Oxygen cylinder</string>
 
 
-    <string name="covid_test">Covid test</string>
+    <string name="covid_test">Covid Self-Assessment</string>
     <string name="get_statistics">Get statistics</string>
     <string name="blood_donation">Blood Donation</string>
     <string name="receive_blood">Receive Blood</string>

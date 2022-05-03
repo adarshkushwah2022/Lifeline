@@ -26,7 +26,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_weight="1"
                 android:text="Covid 19 Statistics"
-                android:textAlignment="textEnd"
+                android:textAlignment="center"
                 android:textColor="#F5F6F2"
                 android:textSize="29sp"
                 android:textStyle="bold|italic" />
