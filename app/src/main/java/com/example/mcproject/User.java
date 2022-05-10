@@ -9,7 +9,6 @@ public class User {
     private String bloodGroup;
     private String address;
     private String pincode;
-    private String token;
     public User(){
 
     }
@@ -81,13 +80,5 @@ public class User {
 
     public void setPincode(String pincode) {
         this.pincode = pincode;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 }

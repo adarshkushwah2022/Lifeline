@@ -28,14 +28,14 @@
 <!--        app:cardUseCompatPadding="true">-->
 
         <TextView
-            android:id="@+id/state_name"
+            android:id="@+id/singleNotificationUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
             android:layout_marginBottom="1dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="State Name"
             android:gravity="center"
+            android:text="State Name"
             android:textAllCaps="true"
             android:textColor="#00F5D8"
             android:textSize="28sp"
@@ -75,7 +75,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/active_cases"
+                    android:id="@+id/singleNotificationTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -103,7 +103,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/total_cases"
+                    android:id="@+id/singleNotificationNeed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
