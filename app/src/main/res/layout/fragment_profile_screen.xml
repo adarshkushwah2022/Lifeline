@@ -8,7 +8,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,10 +31,9 @@
                     android:layout_height="130dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="15dp"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="#000"
                     android:src="@drawable/ic__profile_new"
-                    />
+                    app:civ_border_color="#000"
+                    app:civ_border_width="2dp" />
 
                 <TextView
                     android:id="@+id/profileScreenMainName"
@@ -223,11 +222,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:enabled="false"
                     android:hint="Enter Pincode"
                     android:inputType="textPersonName"
                     android:textSize="20sp"
-                    tools:ignore="DuplicateIds"
-                    android:enabled="false"/>
+                    tools:ignore="DuplicateIds" />
 
             </LinearLayout>
 
@@ -250,11 +249,17 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/button_style"
-                android:drawableLeft="@drawable/ic__logout"
                 android:clickable="true"
+                android:drawableLeft="@drawable/ic__logout"
                 android:text="Sign Out"
                 android:textSize="18sp"
                 tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+            <Button
+                android:id="@+id/testingButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
         </LinearLayout>
     </ScrollView>
     <ProgressBar

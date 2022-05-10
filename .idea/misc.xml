@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/drawable/helpicon.xml" value="0.1625" />
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/layout/activity_covid_cases.xml" value="0.21666666666666667" />
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/layout/activity_donor.xml" value="0.21666666666666667" />
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/layout/activity_location_track.xml" value="0.21666666666666667" />
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/layout/activity_main.xml" value="0.21666666666666667" />
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/layout/activity_main_menu.xml" value="0.21666666666666667" />
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/layout/activity_temp.xml" value="0.21666666666666667" />
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/layout/fragment_home_screen.xml" value="0.21666666666666667" />
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/layout/fragment_notification_list.xml" value="0.196875" />
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/layout/fragment_profile_screen.xml" value="0.21666666666666667" />
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/layout/singleNotificationRow.xml" value="0.19479166666666667" />
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/layout/singlenotificationrow.xml" value="0.19479166666666667" />
+        <entry key="..\:/Mobile-Computing-Project/app/src/main/res/layout/singlerow_covidcases.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/hp/Mobile-Computing-Project/app/src/main/res/layout/activity_donor.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/hp/Mobile-Computing-Project/app/src/main/res/layout/activity_register.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/hp/Mobile-Computing-Project/app/src/main/res/layout/alert_dialog_profile_picture.xml" value="0.20416666666666666" />
