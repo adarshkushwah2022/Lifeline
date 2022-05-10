@@ -18,17 +18,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MCproject">
         <activity
-            android:name=".tempactivity"
+            android:name=".tempActivity"
             android:exported="false" />
 
-        <service
-            android:name=".sendNotification.receiveNotificationService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/mapsAPIKey" />
 
+        <activity
+            android:name=".locationTrackActivity"
+            android:exported="false" />
         <activity
             android:name=".DonorActivity"
             android:exported="false" />
