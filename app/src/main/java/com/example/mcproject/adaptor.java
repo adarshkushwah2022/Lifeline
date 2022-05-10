@@ -42,9 +42,9 @@ public class adaptor extends RecyclerView.Adapter<adaptor.vholder> {
 
         public vholder(@NonNull View itemView) {
             super(itemView);
-            state=itemView.findViewById(R.id.singleNotificationUserName);
-            active_case=itemView.findViewById(R.id.singleNotificationTime);
-            total_case=itemView.findViewById(R.id.singleNotificationNeed);
+            state=itemView.findViewById(R.id.state_name);
+            active_case=itemView.findViewById(R.id.active_cases);
+            total_case=itemView.findViewById(R.id.total_cases);
             total_death=itemView.findViewById(R.id.total_death);
             recovery=itemView.findViewById(R.id.total_recovery);
         }

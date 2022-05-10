@@ -64,7 +64,7 @@ import java.util.Map;
 @SuppressWarnings("ALL")
 public class profileScreen extends Fragment {
     TextView profileScreenUserName, profileScreenContactNumber, profileScreenBloodGroup, profileScreenAddress,profileScreenPinCode,profileScreenMainName;
-    Button editDetailsButton,signOutButton,testingButton;
+    Button editDetailsButton,signOutButton;
     ImageView profilePhoto , cameraViewForImage, galleryViewForImage;
     //BottomNavigationView bmv;
     MeowBottomNavigation menuTwo;
@@ -138,14 +138,12 @@ public class profileScreen extends Fragment {
         profilePhoto = view.findViewById(R.id.profieScreenimageView3);
         signOutButton = view.findViewById(R.id.profileScreenSignOutButton);
         profileScreenMainName = view.findViewById(R.id.profileScreenMainName);
-        testingButton=view.findViewById(R.id.testingButton);
         progressBar = view.findViewById(R.id.progressBar);
         locationHandler = new CustomLocationHandler(getActivity());
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(2000);
-
 
         //bmv = getActivity().findViewById(R.id.bottomNavigationView);
         menuTwo = getActivity().findViewById(R.id.bottomNavigation);
@@ -196,17 +194,7 @@ public class profileScreen extends Fragment {
                     selectProfileImageOperation(/*bmv*/);
                 }
         });
-
-        testingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getContext(),DonorActivity.class);
-                startActivity(i);
-            }
-        });
         return  view;
-
-
     }
 
     private void saveDetails() {

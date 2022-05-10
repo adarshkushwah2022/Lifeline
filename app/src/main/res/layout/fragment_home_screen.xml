@@ -61,7 +61,7 @@
 
 
                         <com.airbnb.lottie.LottieAnimationView
-                            android:id="@+id/continueButtonLottie"
+                            android:id="@+id/homeScreenblood"
                             android:layout_width="match_parent"
                             android:layout_height="138dp"
                             android:layout_marginLeft="7sp"

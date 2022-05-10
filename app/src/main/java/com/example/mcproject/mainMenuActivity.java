@@ -45,7 +45,7 @@ public class mainMenuActivity extends AppCompatActivity {
 
         meowBottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic__home_new));
         meowBottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic__profile_new));
-        meowBottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic__554319801578287702));
+        meowBottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic__settings_new));
 
         meowBottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
@@ -61,7 +61,6 @@ public class mainMenuActivity extends AppCompatActivity {
                         menuSet=false;
                         break;
                     case 3:
-                        generatenotificationListFragment();
                         menuSet=false;
                         break;
                     default: throw new IllegalStateException("Unexpected value: " + item.getId());
@@ -112,8 +111,5 @@ public class mainMenuActivity extends AppCompatActivity {
     }
     private void generateProfileFragment(){
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_right,R.anim.enter_from_right,R.anim.exit_to_right).replace(R.id.mainMenuContainer,new profileScreen()).commit();
-    }
-    private void generatenotificationListFragment(){
-        getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_right,R.anim.enter_from_right,R.anim.exit_to_right).replace(R.id.mainMenuContainer,new notificationListFragment()).commit();
     }
 }
