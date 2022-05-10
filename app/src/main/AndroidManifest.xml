@@ -25,6 +25,20 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/mapsAPIKey" />
 
+
+        <activity
+            android:name=".tempactivity"
+            android:exported="false" />
+
+        <service
+            android:name=".sendNotification.receiveNotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
         <activity
             android:name=".locationTrackActivity"
             android:exported="false" />
