@@ -1,29 +1,57 @@
 package com.example.mcproject;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.mcproject.sendNotification.Client;
+import com.example.mcproject.sendNotification.Data;
+import com.example.mcproject.sendNotification.MyResponse;
+import com.example.mcproject.sendNotification.NotificationSender;
+import com.example.mcproject.sendNotification.messagingAPIService;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
     int[] reds = {255,51,255,102,153,204,204,0};
     int[] greens = {255,255,153,255,76,255,0,51};
     int[] blues = {0,51,153,102,0,204,204,102};
     int colorCounter=0;
+    String userID;
     Context context;
-    String[] notificationNumberArray;
+    List<notficationEntity> recievedNotificationsList;
     notificationListFragment fr;
-    public myAdapter(String[] newsNumberArray,Context context,notificationListFragment fr) {
+    private messagingAPIService apiService;
+
+    public myAdapter(List<notficationEntity> recievedNotificationsList, Context context, notificationListFragment fr) {
         this.context=context;
-        this.notificationNumberArray = newsNumberArray;
+        this.recievedNotificationsList = recievedNotificationsList;
         this.fr=fr;
     }
 
@@ -32,19 +60,39 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
     public holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view  = inflater.inflate(R.layout.singlenotificationrow, parent, false);
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(messagingAPIService.class);
 
         return new holder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull myAdapter.holder holder, int position) {
-        holder.userName.setText(notificationNumberArray[position]);
-        holder.userNeed.setText(notificationNumberArray[position]);
-        holder.userTime.setText(notificationNumberArray[position]);
+        holder.userName.setText("Patient Name:   "+recievedNotificationsList.get(position).getUserName());
+        holder.userNeed.setText(recievedNotificationsList.get(position).getRequirement());
+        holder.userTime.setText(recievedNotificationsList.get(position).getCurrentTime());
 
+        userID = recievedNotificationsList.get(position).getUserID();
         holder.continueButtonLottieAnimation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                FirebaseDatabase.getInstance().getReference().child("Users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String usertoken = "";
+                        usertoken = dataSnapshot.child("token").getValue(String.class);
+                        Log.d("token", usertoken);
+                        sendNotifications(usertoken);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+
+                });
+
+
                 Intent i = new Intent(context,DonorActivity.class);
                 context.startActivity(i);
             }
@@ -62,7 +110,7 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
 
     @Override
     public int getItemCount() {
-        return notificationNumberArray.length;
+        return recievedNotificationsList.size();
     }
     class holder extends RecyclerView.ViewHolder {
         TextView userName,userNeed,userTime;
@@ -80,4 +128,29 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
 //            colorCounter = (colorCounter + 1) % reds.length;
         }
     }
+
+    public void sendNotifications(String usertoken) {
+
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        userID = firebaseUser.getUid();
+
+        Data data = new Data(true);
+        NotificationSender sender = new NotificationSender(data, usertoken);
+        apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
+            @Override
+            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                if (response.code() == 200) {
+                    if (response.body().success != 1) {
+                        Toast.makeText(context.getApplicationContext(), "Failed ", Toast.LENGTH_LONG);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
 }

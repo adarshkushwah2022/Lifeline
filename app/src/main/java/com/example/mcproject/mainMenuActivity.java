@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -38,7 +39,14 @@ public class mainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         locationHandler = new CustomLocationHandler(this);
-        getSupportFragmentManager().beginTransaction().replace(R.id.mainMenuContainer,new homeScreen()).commit();
+        Boolean tempb = getIntent().getBooleanExtra("callFromNotification", false);
+        Log.d("GG", "onCreate: "+tempb);
+        if(tempb != false) {
+            generatenotificationListFragment();
+        }
+        else{
+            getSupportFragmentManager().beginTransaction().replace(R.id.mainMenuContainer,new homeScreen()).commit();
+        }
 
 
         meowBottomNavigation = findViewById(R.id.bottomNavigation);

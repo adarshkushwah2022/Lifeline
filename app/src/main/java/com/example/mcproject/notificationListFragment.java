@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,7 +22,6 @@ import java.util.List;
 public class notificationListFragment extends Fragment {
     RecyclerView rcv;
     Context context;
-    String[] notificationUserNameArray;
 
     AppDatabase databaseObj;
     // TODO: Rename parameter arguments, choose names that match
@@ -73,21 +73,10 @@ public class notificationListFragment extends Fragment {
         databaseObj = AppDatabase.getDatabaseInstance(context);
         rcv = view.findViewById(R.id.rr8);
 
-
-        databaseObj.userDao().insertnotificationEntry(new notficationEntity("user 1",11.2,12.2));
-        databaseObj.userDao().insertnotificationEntry(new notficationEntity("user 2",11.2,12.2));
-        databaseObj.userDao().insertnotificationEntry(new notficationEntity("user 3",11.2,12.2));
-        databaseObj.userDao().insertnotificationEntry(new notficationEntity("user 5",11.2,12.2));
-        databaseObj.userDao().insertnotificationEntry(new notficationEntity("user 6",11.2,12.2));
-
         List<notficationEntity> recievedNotificationsList = databaseObj.userDao().getNotificationsList();
-        notificationUserNameArray=new String[recievedNotificationsList.size()];
-        for(int i=0;i<recievedNotificationsList.size();i++){
-            String currentUserName = recievedNotificationsList.get(i).getUserName();
-            notificationUserNameArray[i]=currentUserName;
-        }
+        Collections.reverse(recievedNotificationsList);
 
-        rcv.setAdapter(new myAdapter(notificationUserNameArray,context,this));
+        rcv.setAdapter(new myAdapter(recievedNotificationsList,context,this));
         rcv.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
     }

@@ -108,7 +108,7 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/edt1"
+                        android:id="@+id/bloodDonationName"
                         android:layout_weight="2"
                         android:hint="@string/enter_your_name"
                         />
@@ -129,7 +129,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/edt2"
+                        android:id="@+id/bloodDonationGroup"
                         android:layout_width="198dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -153,7 +153,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/edt12"
+                        android:id="@+id/bloodDonationCity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -176,7 +176,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/edt13"
+                        android:id="@+id/bloodDonationQuantity"
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -198,7 +198,7 @@
                         android:textStyle="bold"
                         android:textSize="20sp" />
                     <EditText
-                        android:id="@+id/edt14"
+                        android:id="@+id/bloodDonationMobile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -218,7 +218,7 @@
                         android:textStyle="bold"
                         android:textSize="20sp" />
                     <EditText
-                        android:id="@+id/edt15"
+                        android:id="@+id/bloodDonationEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"

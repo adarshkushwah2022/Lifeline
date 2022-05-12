@@ -2,12 +2,19 @@ package com.example.mcproject;
 
 import static android.view.View.GONE;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -15,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mcproject.sendNotification.Client;
@@ -31,6 +39,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,6 +56,10 @@ public class Blood_donation extends Fragment {
     private static final String SHARED_PREF_NAME = "MCpref";
     private static final String KEY_UID = "UID";
     private static final String KEY_TOKEN = "TOKEN";
+    EditText name, quantity, bloodGroup, mobileNo;
+
+    LocationManager locationManager;
+    LocationListener locationListener;
 
 
     // TODO: Rename and change types of parameters
@@ -87,6 +101,18 @@ public class Blood_donation extends Fragment {
         sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         submitBtn = view.findViewById(R.id.bloodDonationSubmitBtn);
 
+        name = view.findViewById(R.id.bloodDonationName);
+        bloodGroup = view.findViewById(R.id.bloodDonationGroup);
+        mobileNo = view.findViewById(R.id.bloodDonationMobile);
+        quantity = view.findViewById(R.id.bloodDonationQuantity);
+
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getContext(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION},1);
+        }
+
+
+
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +150,35 @@ public class Blood_donation extends Fragment {
 
 
     public void sendNotifications(String usertoken) {
-        Data data = new Data("akash");
+
+        String name_t = name.getText().toString();
+        String mobile_t = mobileNo.getText().toString();
+        String blood_t = bloodGroup.getText().toString();
+        String quantity_t = quantity.getText().toString();
+        Double latitude=0.0, longitude=0.0;
+        String userID;
+
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getContext(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION},1);
+        }
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new MyLocationListener();
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 1, locationListener);
+
+        Location location;
+        if (locationManager != null) {
+            location = getLastKnownLocation();
+
+            if (location != null) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
+        }
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        userID = firebaseUser.getUid();
+
+        Data data = new Data(name_t, blood_t,mobile_t,quantity_t, "Blood", userID, latitude, longitude);
         NotificationSender sender = new NotificationSender(data, usertoken);
         apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
             @Override
@@ -141,5 +195,47 @@ public class Blood_donation extends Fragment {
 
             }
         });
+    }
+
+
+    private Location getLastKnownLocation() {
+//        locationManager = (LocationManager)getApplicationContext().getSystemService(LOCATION_SERVICE);
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getContext(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION},1);
+        }
+        for (String provider : providers) {
+            Location l = locationManager.getLastKnownLocation(provider);
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                // Found best last known location: %s", l);
+                bestLocation = l;
+            }
+        }
+        return bestLocation;
+    }
+
+    class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(@NonNull Location loc) {
+
+
+        }
+
+        @Override
+        public void onFlushComplete(int requestCode) {
+            LocationListener.super.onFlushComplete(requestCode);
+        }
+
+
+        @Override
+        public void onProviderDisabled(@NonNull String provider) {
+            LocationListener.super.onProviderDisabled(provider);
+        }
     }
 }
