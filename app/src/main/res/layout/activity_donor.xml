@@ -3,80 +3,112 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#837C57"
     tools:context=".DonorActivity">
+    <!--    android:background="#DBF4F2"-->
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="#F3E59D">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="5sp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="10sp"
+                android:background="@drawable/border_activity_donor"
+                android:backgroundTint="#FABA4E"
+                android:orientation="horizontal"
+                android:paddingBottom="20sp">
 
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="5"
-                    android:gravity="center"
-                    android:text="@string/donor_details" />
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="175dp"
-                    android:layout_height="155dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    android:gravity="center"
+                    android:text="Receiver Details"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="30sp"
+                    android:textStyle="italic|bold" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/useranimation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="94dp"
+                    android:layout_marginLeft="3sp"
+                    android:layout_weight="80"
+                    app:lottie_autoPlay="true"
+                    app:lottie_rawRes="@raw/user1"
+                    app:lottie_repeatCount="10" />
+
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50sp"
+                android:layout_marginBottom="15sp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
+                    android:layout_width="149dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingStart="30sp"
-                    android:text="@string/name" />
+                    android:text="@string/name"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="25sp"
+                    android:textStyle="italic|bold" />
 
                 <TextView
                     android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3" />
+                    android:layout_weight="3"
+                    android:hint="Username"
+                    android:textSize="25sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15sp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:paddingStart="30sp"
-                    android:text="@string/blood_group12" />
+                    android:text="@string/blood_group12"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="25sp"
+                    android:textStyle="italic|bold" />
 
                 <TextView
                     android:id="@+id/textView17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3" />
+                    android:layout_marginLeft="14dp"
+                    android:layout_weight="3"
+                    android:hint="Blood group"
+                    android:textSize="25sp" />
 
             </LinearLayout>
 
@@ -84,21 +116,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15sp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView18"
-                    android:layout_width="wrap_content"
+                    android:layout_width="155dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingStart="30sp"
-                    android:text="@string/mobile" />
+                    android:text="@string/mobile"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="25sp"
+                    android:textStyle="italic|bold" />
 
                 <TextView
                     android:id="@+id/textView19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3" />
+                    android:layout_marginLeft="14dp"
+                    android:layout_weight="3"
+                    android:hint="Contact number"
+                    android:textSize="25sp" />
 
             </LinearLayout>
 
@@ -106,24 +145,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15sp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView21"
-                    android:layout_width="wrap_content"
+                    android:layout_width="136dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingStart="30sp"
-                    android:text="@string/blood_group1234" />
+                    android:text="Requirement"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="24sp"
+                    android:textStyle="italic|bold" />
 
                 <TextView
                     android:id="@+id/textView22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3" />
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="3"
+                    android:hint="Help needed"
+                    android:textSize="25sp" />
 
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -133,25 +178,79 @@
 
                 <TextView
                     android:id="@+id/textView23"
-                    android:layout_width="wrap_content"
+                    android:layout_width="166dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingStart="30sp"
-                    android:text="@string/email12" />
+                    android:text="Received At"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="23sp"
+                    android:textStyle="italic|bold" />
 
                 <TextView
                     android:id="@+id/textView24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3" />
+                    android:layout_marginLeft="11dp"
+                    android:layout_weight="3"
+                    android:hint="Incoming Time"
+                    android:textSize="25sp" />
 
             </LinearLayout>
 
             <Button
-                android:id="@+id/proceedButtonDonorActivity"
+                android:id="@+id/button5"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="Call"
+                android:textSize="26sp" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/proceed" />
+                android:layout_height="213dp"
+                android:layout_marginTop="10sp"
+                android:orientation="horizontal">
+
+                <!--Button
+                    android:id="@+id/button2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="40sp"
+                    android:layout_weight="190"
+                    android:background="@drawable/background"
+                    android:text="@string/proceed"
+                    android:textSize="20sp"
+                    android:textStyle="italic|bold" /-->
+
+                <!--com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="40sp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_rawRes="@raw/start1"
+                    app:lottie_repeatCount="10" /-->
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/proceedButtonDonorActivity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3sp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_rawRes="@raw/start1"
+                    app:lottie_repeatCount="10" />
+
+
+                <!--com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/tick1"
+                    android:layout_width="78dp"
+                    android:layout_height="74dp"
+                    android:layout_marginTop="40sp"
+                    android:layout_weight="5"
+                    app:lottie_autoPlay="true"
+                    app:lottie_rawRes="@raw/tick"
+                    app:lottie_repeatCount="10" /-->
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

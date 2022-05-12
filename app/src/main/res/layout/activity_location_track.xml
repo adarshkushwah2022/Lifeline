@@ -1,22 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/city3"
+            android:layout_width="164dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="1sp"
+            android:layout_weight="1"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/mapss"
+            app:lottie_repeatCount="10"
+            tools:ignore="NestedWeights" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:fontFamily="serif"
+            android:text="Map Visualization"
+            android:textAlignment="center"
+            android:textColor="#0A0A0A"
+            android:textSize="36sp" />
+    </LinearLayout>
 
     <fragment
         android:id="@+id/mapNearBy"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/rvToolbar"
         android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/btnGetDirection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:text="Get Direction"
-        android:textColor="#070707" />
 </LinearLayout>

@@ -13,6 +13,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Looper;
@@ -64,7 +68,7 @@ import java.util.Map;
 @SuppressWarnings("ALL")
 public class profileScreen extends Fragment {
     TextView profileScreenUserName, profileScreenContactNumber, profileScreenBloodGroup, profileScreenAddress,profileScreenPinCode,profileScreenMainName;
-    Button editDetailsButton,signOutButton,testingButton;
+    Button editDetailsButton,signOutButton;
     ImageView profilePhoto , cameraViewForImage, galleryViewForImage;
     //BottomNavigationView bmv;
     MeowBottomNavigation menuTwo;
@@ -91,6 +95,11 @@ public class profileScreen extends Fragment {
     private CustomLocationHandler locationHandler;
     private LocationRequest locationRequest;
     private ProgressBar progressBar;
+    private String uid;
+
+    LocationManager locationManager;
+    LocationListener locationListener;
+
     public profileScreen() {
         // Required empty public constructor
     }
@@ -127,7 +136,7 @@ public class profileScreen extends Fragment {
                              Bundle savedInstanceState) {
 
         sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-
+        uid = sharedPreferences.getString(KEY_UID, null);
         View view =  inflater.inflate(R.layout.fragment_profile_screen, container, false);
         profileScreenUserName =view.findViewById(R.id.profileScreenEditText1);
         profileScreenContactNumber =view.findViewById(R.id.profileScreenEditText2);
@@ -138,7 +147,6 @@ public class profileScreen extends Fragment {
         profilePhoto = view.findViewById(R.id.profieScreenimageView3);
         signOutButton = view.findViewById(R.id.profileScreenSignOutButton);
         profileScreenMainName = view.findViewById(R.id.profileScreenMainName);
-        testingButton=view.findViewById(R.id.testingButton);
         progressBar = view.findViewById(R.id.progressBar);
         locationHandler = new CustomLocationHandler(getActivity());
         locationRequest = LocationRequest.create();
@@ -197,13 +205,6 @@ public class profileScreen extends Fragment {
                 }
         });
 
-        testingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getContext(),DonorActivity.class);
-                startActivity(i);
-            }
-        });
         return  view;
 
 
@@ -240,19 +241,12 @@ public class profileScreen extends Fragment {
             profileScreenContactNumber.setText(contact);
         if(bloodGroup != null)
             profileScreenBloodGroup.setText(bloodGroup);
-        if(address != null){
-            profileScreenAddress.setText(address);
-            profileScreenPinCode.setText(pincode);
+        if(locationHandler.isGPSEnabled()){
+            progressBar.setVisibility(View.VISIBLE);
+            getCurrentLocation();
         }
-        else{
-            if(locationHandler.isGPSEnabled()){
-                progressBar.setVisibility(View.VISIBLE);
-                getCurrentLocation();
-            }
-            else
-                locationHandler.turnOnGPS();
-        }
-
+        else
+            locationHandler.turnOnGPS();
     }
 
     private void activeDeactiveDetails(Boolean action){
@@ -398,56 +392,60 @@ public class profileScreen extends Fragment {
         }
     }
 
+
     private void getCurrentLocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                locationListener = new MyLocationListener();
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 1, locationListener);
+
 
                 if (locationHandler.isGPSEnabled()) {
 
-                    LocationServices.getFusedLocationProviderClient(getActivity())
-                            .requestLocationUpdates(locationRequest, new LocationCallback() {
-                                @Override
-                                public void onLocationResult(@NonNull LocationResult locationResult) {
-                                    super.onLocationResult(locationResult);
+                    Location location;
+                    if (locationManager != null) {
+                        location = getLastKnownLocation();
 
-                                    LocationServices.getFusedLocationProviderClient(getActivity())
-                                            .removeLocationUpdates(this);
+                        if (location != null) {
+                            double latitude = location.getLatitude();
+                            double longitude = location.getLongitude();
+                            Map<String, Object> userUpdates = new HashMap<>();
+                            userUpdates.put(uid + '/' + "latitude", Double.toString(latitude));
+                            userUpdates.put(uid + '/' + "longitude", Double.toString(longitude));
+                            FirebaseDatabase.getInstance().getReference("Users").updateChildren(userUpdates);
 
-                                    if (locationResult != null && locationResult.getLocations().size() >0){
+                            String strAdd = "";
+                            String pincode = "";
+                            Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+                            try {
+                                List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                                if (addresses != null) {
+                                    Address returnedAddress = addresses.get(0);
+                                    pincode = addresses.get(0).getPostalCode();
+                                    StringBuilder strReturnedAddress = new StringBuilder("");
 
-                                        int index = locationResult.getLocations().size() - 1;
-                                        double latitude = locationResult.getLocations().get(index).getLatitude();
-                                        double longitude = locationResult.getLocations().get(index).getLongitude();
-                                        String strAdd = "";
-                                        String pincode = "";
-                                        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
-                                        try {
-                                            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                                            if (addresses != null) {
-                                                Address returnedAddress = addresses.get(0);
-                                                pincode = addresses.get(0).getPostalCode();
-                                                StringBuilder strReturnedAddress = new StringBuilder("");
-
-                                                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
-                                                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
-                                                }
-                                                strAdd = strReturnedAddress.toString();
-                                                profileScreenAddress.setText(strAdd);
-                                                profileScreenPinCode.setText(pincode);
-                                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                                editor.putString(KEY_ADDRESS, strAdd);
-                                                editor.putString(KEY_PINCODE, pincode);
-                                                editor.apply();
-                                                progressBar.setVisibility(GONE);
-                                            } else {
-                                            }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-
+                                    for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
+                                        strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
                                     }
+                                    strAdd = strReturnedAddress.toString();
+                                    profileScreenAddress.setText(strAdd);
+                                    profileScreenPinCode.setText(pincode);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString(KEY_ADDRESS, strAdd);
+                                    editor.putString(KEY_PINCODE, pincode);
+                                    editor.apply();
+                                    progressBar.setVisibility(GONE);
+                                    userUpdates.put(uid + '/' + "address", strAdd);
+                                    userUpdates.put(uid + '/' + "pincode", pincode);
+                                    FirebaseDatabase.getInstance().getReference("Users").updateChildren(userUpdates);
+                                } else {
                                 }
-                            }, Looper.getMainLooper());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
 
                 } else {
                     locationHandler.turnOnGPS();
@@ -458,4 +456,47 @@ public class profileScreen extends Fragment {
             }
         }
     }
+
+    private Location getLastKnownLocation() {
+
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getContext(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION},1);
+        }
+        for (String provider : providers) {
+            Location l = locationManager.getLastKnownLocation(provider);
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                // Found best last known location: %s", l);
+                bestLocation = l;
+            }
+        }
+        return bestLocation;
+    }
+
+
+    class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(@NonNull Location loc) {
+
+
+        }
+
+        @Override
+        public void onFlushComplete(int requestCode) {
+            LocationListener.super.onFlushComplete(requestCode);
+        }
+
+
+        @Override
+        public void onProviderDisabled(@NonNull String provider) {
+            LocationListener.super.onProviderDisabled(provider);
+        }
+    }
+
 }

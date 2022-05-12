@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mcproject">
-
+    <permission android:name="com.example.maptest.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -9,6 +9,11 @@
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <queries>
+        <package android:name="com.google.android.apps.maps" />
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -41,9 +46,11 @@
 
         <activity
             android:name=".locationTrackActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:exported="false" />
         <activity
             android:name=".DonorActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:exported="false" />
         <activity
             android:name=".CovidCasesActivity"
@@ -71,6 +78,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

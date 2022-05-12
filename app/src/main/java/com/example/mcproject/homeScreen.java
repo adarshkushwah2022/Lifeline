@@ -1,13 +1,27 @@
 package com.example.mcproject;
 
+import static android.view.View.GONE;
+
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Looper;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -17,6 +31,17 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +66,12 @@ public class homeScreen extends Fragment {
     private String uid, username;
     private SharedPreferences sharedPreferences;
     private  TextView txtViewGreeting;
+    private CustomLocationHandler locationHandler;
+    private LocationRequest locationRequest;
 
+
+    LocationManager locationManager;
+    LocationListener locationListener;
 
     public homeScreen() {
         // Required empty public constructor
@@ -79,6 +109,7 @@ public class homeScreen extends Fragment {
                              Bundle savedInstanceState) {
         sharedPreferences = this.getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         username = sharedPreferences.getString(KEY_USERNAME,null);
+        uid = sharedPreferences.getString(KEY_UID, null);
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_home_screen, container, false);
         knowMore = view.findViewById(R.id.homeScreenCardView8);
@@ -89,14 +120,20 @@ public class homeScreen extends Fragment {
         selfAssessment = view.findViewById(R.id.cardView7);
         txtViewGreeting = view.findViewById(R.id.txtViewGreeting);
         txtViewGreeting.setText("Welcome, " + username);
+        locationHandler = new CustomLocationHandler(getActivity());
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(2000);
+        getCurrentLocation();
         knowMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager()
-                             .beginTransaction()
-                             .replace(R.id.mainMenuContainer,new knowMoreScreen())
-                             .addToBackStack(null)
-                             .commit();
+                        .beginTransaction()
+                        .replace(R.id.mainMenuContainer,new knowMoreScreen())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -151,5 +188,81 @@ public class homeScreen extends Fragment {
 
         return view;
     }
+    private void getCurrentLocation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                locationListener = new MyLocationListener();
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 1, locationListener);
 
+
+                if (locationHandler.isGPSEnabled()) {
+
+                    Location location;
+                    if (locationManager != null) {
+                        location = getLastKnownLocation();
+
+                        if (location != null) {
+                            double latitude = location.getLatitude();
+                            double longitude = location.getLongitude();
+                            Map<String, Object> userUpdates = new HashMap<>();
+                            userUpdates.put(uid + '/' + "latitude", Double.toString(latitude));
+                            userUpdates.put(uid + '/' + "longitude", Double.toString(longitude));
+                            FirebaseDatabase.getInstance().getReference("Users").updateChildren(userUpdates);
+
+                        }
+                    }
+
+                } else {
+                    locationHandler.turnOnGPS();
+                }
+
+            } else {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+        }
+    }
+
+    private Location getLastKnownLocation() {
+
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getContext(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION},1);
+        }
+        for (String provider : providers) {
+            Location l = locationManager.getLastKnownLocation(provider);
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                // Found best last known location: %s", l);
+                bestLocation = l;
+            }
+        }
+        return bestLocation;
+    }
+
+
+    class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(@NonNull Location loc) {
+
+
+        }
+
+        @Override
+        public void onFlushComplete(int requestCode) {
+            LocationListener.super.onFlushComplete(requestCode);
+        }
+
+
+        @Override
+        public void onProviderDisabled(@NonNull String provider) {
+            LocationListener.super.onProviderDisabled(provider);
+        }
+    }
 }
+

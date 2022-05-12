@@ -9,6 +9,13 @@ public class User {
     private String bloodGroup;
     private String address;
     private String pincode;
+    private String latitude;
+    private String longitude;
+    private String token;
+    private String timeStamp;
+    private String UID;
+
+
     public User(){
 
     }
@@ -80,5 +87,45 @@ public class User {
 
     public void setPincode(String pincode) {
         this.pincode = pincode;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
     }
 }

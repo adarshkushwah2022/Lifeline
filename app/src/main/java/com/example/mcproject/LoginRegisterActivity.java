@@ -189,8 +189,6 @@ public class LoginRegisterActivity extends AppCompatActivity implements View.OnC
                     editor.putString(KEY_FULLNAME, user.getFullname());
                     editor.putString(KEY_CONTACT, user.getContactNumber());
                     editor.putString(KEY_BLOODGROUP, user.getBloodGroup());
-                    editor.putString(KEY_ADDRESS, user.getAddress());
-                    editor.putString(KEY_PINCODE, user.getPincode());
                     editor.apply();
                     progressBar.setVisibility(GONE);
                     Intent intent = new Intent(LoginRegisterActivity.this, mainMenuActivity.class);

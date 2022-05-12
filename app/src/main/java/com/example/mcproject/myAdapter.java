@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
+public class  myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
     int[] reds = {255,51,255,102,153,204,204,0};
     int[] greens = {255,255,153,255,76,255,0,51};
     int[] blues = {0,51,153,102,0,204,204,102};
@@ -75,7 +77,6 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
         holder.continueButtonLottieAnimation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 FirebaseDatabase.getInstance().getReference().child("Users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -91,9 +92,26 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
                     }
 
                 });
+                double userLatitude=recievedNotificationsList.get(position).getLatitude();
+                double userLongitude=recievedNotificationsList.get(position).getLongitude();
+                String name = recievedNotificationsList.get(position).getUserName();
+                String mobile = recievedNotificationsList.get(position).getMobileNo();
+                String requirement = recievedNotificationsList.get(position).getRequirement();
+                String bloodGroup = recievedNotificationsList.get(position).getBloodGroup();
+                String time = recievedNotificationsList.get(position).getCurrentTime();
 
 
+//                Bundle d = new Bundle();
+//                d.putDouble("patientLatitude",userLatitude);
+//                d.putDouble("patientLongitude",userLongitude);
                 Intent i = new Intent(context,DonorActivity.class);
+                i.putExtra("patientLatitude",userLatitude);
+                i.putExtra("patientLongitude",userLongitude);
+                i.putExtra("name",name);
+                i.putExtra("mobile",mobile);
+                i.putExtra("requirement",requirement);
+                i.putExtra("bloodGroup",bloodGroup);
+                i.putExtra("time",time);
                 context.startActivity(i);
             }
         });

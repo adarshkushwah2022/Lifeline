@@ -19,8 +19,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.mcproject.sendNotification.Token;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class mainMenuActivity extends AppCompatActivity {
     BottomNavigationView bmv;
@@ -47,6 +52,8 @@ public class mainMenuActivity extends AppCompatActivity {
         else{
             getSupportFragmentManager().beginTransaction().replace(R.id.mainMenuContainer,new homeScreen()).commit();
         }
+
+        UpdateToken();
 
 
         meowBottomNavigation = findViewById(R.id.bottomNavigation);
@@ -123,5 +130,14 @@ public class mainMenuActivity extends AppCompatActivity {
     }
     private void generatenotificationListFragment(){
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_right,R.anim.enter_from_right,R.anim.exit_to_right).replace(R.id.mainMenuContainer,new notificationListFragment()).commit();
+    }
+
+    private void UpdateToken(){
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        String refreshToken= FirebaseInstanceId.getInstance().getToken();
+        Token token= new Token(refreshToken);
+        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("token").setValue(refreshToken);
+
+
     }
 }

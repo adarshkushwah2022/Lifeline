@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Plasma_Donation"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:background="#FF0099CC"
+    android:orientation="vertical"
+    tools:context=".Plasma_Donation">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="#D6EDF8">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/border_plasma">
+
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border_plasma"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -41,7 +49,7 @@
                     app:lottie_repeatCount="10" />
 
             </LinearLayout>
-            <LinearLayout
+            <!--LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -75,10 +83,10 @@
                         android:textStyle="bold" />
                 </RadioGroup>
 
-            </LinearLayout>
+            </LinearLayout-->
 
             <TextView
-                android:id="@+id/text9"
+                android:id="@+id/plasmaDonationFillOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
@@ -86,38 +94,61 @@
                 android:gravity="center"
                 android:text="@string/fill_out_the_details"
                 android:textSize="20sp"
-                android:textStyle="italic">
-            </TextView>
+                android:textStyle="italic" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/username2"
+                        android:layout_width="11dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1sp"
+                        android:layout_weight="1"
+                        app:lottie_autoPlay="true"
+                        app:lottie_rawRes="@raw/username"
+                        app:lottie_repeatCount="10" />
+
                     <TextView
+                        android:id="@+id/text10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/text10"
-                        android:text="@string/name"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         android:layout_marginLeft="20sp"
                         android:layout_weight="2"
-                        />
+                        android:text="@string/name"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
                     <EditText
+                        android:id="@+id/plasmaDonationName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/bloodDonationName"
+                        android:layout_marginRight="6dp"
                         android:layout_weight="2"
-                        android:hint="@string/enter_your_name"
-                        />
+                        android:hint="@string/enter_your_name" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/bloodgp2"
+                        android:layout_width="11dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1sp"
+                        android:layout_weight="3"
+                        app:lottie_autoPlay="true"
+                        app:lottie_rawRes="@raw/blood_group"
+                        app:lottie_repeatCount="10" />
 
                     <TextView
                         android:id="@+id/text11"
@@ -126,15 +157,14 @@
                         android:layout_marginLeft="20sp"
                         android:layout_weight="2"
                         android:text="@string/blood_group"
-                        android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                    <EditText
-                        android:id="@+id/bloodDonationGroup"
-                        android:layout_width="198dp"
+                    <Spinner
+                        android:id="@+id/plasmaDonationBloodGroupSpinner"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:hint="Enter your blood group" />
+                        android:layout_weight="3" />
                 </LinearLayout>
 
 
@@ -143,20 +173,31 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/city2"
+                        android:layout_width="11dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1sp"
+                        android:layout_weight="1"
+                        app:lottie_autoPlay="true"
+                        app:lottie_rawRes="@raw/city"
+                        app:lottie_repeatCount="10" />
+
                     <TextView
                         android:id="@+id/text12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20sp"
                         android:layout_weight="2"
-                        android:textStyle="bold"
                         android:text="@string/city"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/bloodDonationCity"
+                        android:id="@+id/plasmaDonationCity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="14dp"
                         android:layout_weight="2"
                         android:hint="@string/enter_your_city" />
                 </LinearLayout>
@@ -166,20 +207,31 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/quantity2"
+                        android:layout_width="11dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1sp"
+                        android:layout_weight="1"
+                        app:lottie_autoPlay="true"
+                        app:lottie_rawRes="@raw/quantity"
+                        app:lottie_repeatCount="10" />
+
                     <TextView
                         android:id="@+id/text13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20sp"
                         android:layout_weight="2"
-                        android:textStyle="bold"
                         android:text="@string/quantity"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/bloodDonationQuantity"
+                        android:id="@+id/plasmaDonationQuantity"
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="3dp"
                         android:layout_weight="2"
                         android:hint="@string/enter_the_quantity" />
                 </LinearLayout>
@@ -190,20 +242,31 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/mobile2"
+                        android:layout_width="21dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1sp"
+                        android:layout_weight="1"
+                        app:lottie_autoPlay="true"
+                        app:lottie_rawRes="@raw/mobilephone"
+                        app:lottie_repeatCount="10" />
+
                     <TextView
                         android:id="@+id/text14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20sp"
                         android:layout_weight="2"
-                        android:textStyle="bold"
                         android:text="@string/mobile"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/bloodDonationMobile"
+                        android:id="@+id/plasmaDonationMobile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="12dp"
                         android:layout_weight="2"
                         android:hint="@string/enter_your_mobile" />
                 </LinearLayout>
@@ -213,32 +276,44 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/email2"
+                        android:layout_width="11dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1sp"
+                        android:layout_weight="1"
+                        app:lottie_autoPlay="true"
+                        app:lottie_rawRes="@raw/email"
+                        app:lottie_repeatCount="10" />
+
                     <TextView
                         android:id="@+id/text15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20sp"
                         android:layout_weight="2"
-                        android:textStyle="bold"
                         android:text="@string/email"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/bloodDonationEmail"
+                        android:id="@+id/plasmaDonationEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
                         android:layout_weight="2"
                         android:hint="@string/enter_your_email" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10sp">
+                    android:layout_height="93dp"
+                    android:layout_marginTop="10sp"
+                    android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/button"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/plasmaDonationSubmitButton"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10sp"
                         android:layout_weight="1"
@@ -249,8 +324,8 @@
                         android:textStyle="bold" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/button3"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/plasmaDonationClearButton"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10sp"
                         android:layout_weight="1"
@@ -262,12 +337,15 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#FF0099CC" />
         </LinearLayout>
 
     </ScrollView>
-
-
-
 
 
 </LinearLayout>

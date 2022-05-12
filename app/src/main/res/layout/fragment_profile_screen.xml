@@ -255,11 +255,6 @@
                 android:textSize="18sp"
                 tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
-            <Button
-                android:id="@+id/testingButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
         </LinearLayout>
     </ScrollView>
     <ProgressBar

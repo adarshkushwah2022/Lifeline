@@ -29,7 +29,7 @@ import java.util.Date;
 public class receiveNotificationService extends FirebaseMessagingService {
     String name,bloodGroup, mobileNo, requirement, quantity, currentTime, userID;
     Double latitude, longitude;
-    boolean sendByReceiver;
+    boolean sendByReceiver = false;
 
     AppDatabase databaseObj;
 
