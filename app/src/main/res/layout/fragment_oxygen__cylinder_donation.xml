@@ -199,7 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="2dp"
                         android:layout_weight="2"
-                        android:hint="@string/enter_the_quantity" />
+                        android:hint="Enter Quantity in Liters" />
                 </LinearLayout>
 
 

@@ -84,7 +84,7 @@ public class receiveNotificationService extends FirebaseMessagingService {
             Notification notification = new NotificationCompat.Builder(receiveNotificationService.this, CHANNEL_ID)
                     .setSmallIcon(R.drawable.lifeline_logo)
                     .setContentTitle("Patient: " + name + " requested via Lifeline")
-                    .setContentText("Requested For: " + requirement + " donation")
+                    .setContentText("Requested For: " + requirement + " donation. Blood Group: "+bloodGroup)
                     .setAutoCancel(true)
                     .setContentIntent(activity)
                     .build();

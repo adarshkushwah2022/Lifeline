@@ -13,4 +13,7 @@ public interface UserDao {
 
     @Query("SELECT * FROM notficationEntity")
     List<notficationEntity> getNotificationsList();
+
+    @Query("DELETE FROM notficationEntity WHERE userID = :id")
+    void deleteNotificationById(String id);
 }

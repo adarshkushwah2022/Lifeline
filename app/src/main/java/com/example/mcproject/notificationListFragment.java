@@ -69,8 +69,11 @@ public class notificationListFragment extends Fragment {
         List<notficationEntity> recievedNotificationsList = databaseObj.userDao().getNotificationsList();
         Collections.reverse(recievedNotificationsList);
 
-        rcv.setAdapter(new myAdapter(recievedNotificationsList,context,this));
+
+        myAdapter mp = new myAdapter(recievedNotificationsList,context,this,rcv);
+        rcv.setAdapter(mp);
         rcv.setLayoutManager(new LinearLayoutManager(getContext()));
+
         return view;
     }
 }

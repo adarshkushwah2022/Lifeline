@@ -83,6 +83,7 @@ public class Blood_donation extends Fragment implements AdapterView.OnItemSelect
     AlertDialog.Builder builder;
 
 
+
     private String time_path = "time_data.txt";
 
     // TODO: Rename and change types of parameters
@@ -160,13 +161,13 @@ public class Blood_donation extends Fragment implements AdapterView.OnItemSelect
             long diff_min=findDifference(cur_timestamp,stored_time)[1];
             long diff_days=findDifference(cur_timestamp,stored_time)[2];
             Log.d("TAG", "onCreateView: "+diff_min+" "+diff_days);
-            if(diff_min<=30){
+            if(diff_days==0 && diff_min<=30){
                 submitBtn.setEnabled(false);
                 submitBtn.setBackgroundColor(Color.GRAY);
                 builder.setMessage(R.string.dialog_message) .setTitle(R.string.dialog_title);
 
                 //Setting message manually and performing action on button click
-                builder.setMessage("User has already sent a request for blood, Kindly try to submit another request after 30 mins. Do you want to close this application ?")
+                builder.setMessage("User has already sent a request for blood, Kindly try to submit another request after "+(30-diff_min)+ " mins. Do you want to close this application ?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -247,7 +248,7 @@ public class Blood_donation extends Fragment implements AdapterView.OnItemSelect
                         double dist = calculateDistance(Double.valueOf(temp.getLatitude()), Double.valueOf(temp.getLongitude()), latitude, longitude);
                         Log.d("uid", "onClick: "+dist);
 
-                        if(dist < 10.0)
+                        if(dist < 20.0)
                         {
                             nearestUsers.add(temp.getUID());
                         }
@@ -272,6 +273,10 @@ public class Blood_donation extends Fragment implements AdapterView.OnItemSelect
 
                     });
                 }
+                Toast.makeText(getContext(),"Notification Successfully Sent to "+nearestUsers.size()+" donors within 20 KM distance from you!!", Toast.LENGTH_LONG).show();
+                submitBtn.setEnabled(false);
+                submitBtn.setBackgroundColor(Color.GRAY);
+
             }
         });
 
@@ -344,7 +349,6 @@ public class Blood_donation extends Fragment implements AdapterView.OnItemSelect
         String name_t = name.getText().toString();
         String mobile_t = mobileNo.getText().toString();
         String quantity_t = quantity.getText().toString();
-        Double latitude=0.0, longitude=0.0;
         String userID;
 
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();

@@ -50,16 +50,20 @@ public class  myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
     List<notficationEntity> recievedNotificationsList;
     notificationListFragment fr;
     private messagingAPIService apiService;
+    AppDatabase databaseObj;
+    RecyclerView rcv;
 
-    public myAdapter(List<notficationEntity> recievedNotificationsList, Context context, notificationListFragment fr) {
+    public myAdapter(List<notficationEntity> recievedNotificationsList, Context context, notificationListFragment fr,RecyclerView rcv) {
         this.context=context;
         this.recievedNotificationsList = recievedNotificationsList;
         this.fr=fr;
+        this.rcv=rcv;
     }
 
     @NonNull
     @Override
     public holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        databaseObj = AppDatabase.getDatabaseInstance(context);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view  = inflater.inflate(R.layout.singlenotificationrow, parent, false);
         apiService = Client.getClient("https://fcm.googleapis.com/").create(messagingAPIService.class);
@@ -115,6 +119,31 @@ public class  myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
                 context.startActivity(i);
             }
         });
+
+        holder.rejectLottie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    databaseObj.userDao().deleteNotificationById(recievedNotificationsList.get(position).getUserID());
+
+//                    recievedNotificationsList.remove(position);
+//                    rcv.removeViewAt(position);
+//                    notifyItemRemoved(position);
+//                    notifyItemRangeChanged(position, recievedNotificationsList.size());
+//                    notifyDataSetChanged();
+                    //fr.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainMenuContainer,new notificationListFragment()).commit();
+                    Toast.makeText(context, "Notification Deleted Successfully", Toast.LENGTH_SHORT).show();
+                    Intent i3 = new Intent(context,tempactivity.class);
+                    context.startActivity(i3);
+                    fr.getActivity().finish();
+                }
+
+                catch (Exception e)
+                {
+
+                }
+            }
+        });
     }
 //    255 255 0
 //    51 255 51
@@ -132,13 +161,14 @@ public class  myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
     }
     class holder extends RecyclerView.ViewHolder {
         TextView userName,userNeed,userTime;
-        LottieAnimationView continueButtonLottieAnimation;
+        LottieAnimationView continueButtonLottieAnimation, rejectLottie;
         public holder(@NonNull View itemView) {
             super(itemView);
             userName = (TextView) itemView.findViewById(R.id.singleNotificationUserName);
             userNeed = (TextView) itemView.findViewById(R.id.singleNotificationNeed);
             userTime = (TextView) itemView.findViewById(R.id.singleNotificationTime);
             continueButtonLottieAnimation=itemView.findViewById(R.id.continueButtonLottie);
+            rejectLottie = itemView.findViewById(R.id.continueButtonLottie2);
 //            txt.setBackgroundColor(Color.rgb(reds[colorCounter],greens[colorCounter],blues[colorCounter]));
 //            if(reds[colorCounter]==153 || greens[colorCounter]==0 || blues[colorCounter]==102 ){
 //                txt.setTextColor(Color.rgb(255,255,255));

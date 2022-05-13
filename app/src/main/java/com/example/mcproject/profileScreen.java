@@ -96,6 +96,7 @@ public class profileScreen extends Fragment {
     private LocationRequest locationRequest;
     private ProgressBar progressBar;
     private String uid;
+    private FileReaderWriter rw;
 
     LocationManager locationManager;
     LocationListener locationListener;
@@ -153,7 +154,7 @@ public class profileScreen extends Fragment {
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(2000);
-
+        rw = new FileReaderWriter(getActivity().getApplicationContext());
 
         //bmv = getActivity().findViewById(R.id.bottomNavigationView);
         menuTwo = getActivity().findViewById(R.id.bottomNavigation);
@@ -227,27 +228,6 @@ public class profileScreen extends Fragment {
         FirebaseDatabase.getInstance().getReference("Users").updateChildren(userUpdates);
     }
 
-    private void fillProfile(){
-        String username = sharedPreferences.getString(KEY_USERNAME, null);
-        String name  = sharedPreferences.getString(KEY_FULLNAME, null);
-        String contact = sharedPreferences.getString(KEY_CONTACT, null);
-        String bloodGroup = sharedPreferences.getString(KEY_BLOODGROUP, null);
-        String address = sharedPreferences.getString(KEY_ADDRESS, null);
-        String pincode = sharedPreferences.getString(KEY_PINCODE,null);
-        profileScreenMainName.setText(username);
-        if(name != null)
-            profileScreenUserName.setText(name);
-        if(contact != null)
-            profileScreenContactNumber.setText(contact);
-        if(bloodGroup != null)
-            profileScreenBloodGroup.setText(bloodGroup);
-        if(locationHandler.isGPSEnabled()){
-            progressBar.setVisibility(View.VISIBLE);
-            getCurrentLocation();
-        }
-        else
-            locationHandler.turnOnGPS();
-    }
 
     private void activeDeactiveDetails(Boolean action){
         profileScreenAddress.setEnabled(action);
@@ -352,18 +332,12 @@ public class profileScreen extends Fragment {
 
     private void setImageInMenu(){
         Drawable profilePicDrawable = profilePhoto.getDrawable();
-        //Menu navMenu = bmv.getMenu();
         Bitmap bitmap = ((BitmapDrawable)profilePicDrawable).getBitmap();
-
-        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-        currentUserImageName = "UserImage"+" "+currentDate+" "+currentTime+".jpg";
-        saveImageToFileManager(bitmap, currentUserImageName);
-
-        File toLoad = new File(getContext().getFilesDir(), currentUserImageName);
+        rw.saveToInternalStorage(bitmap);
+        File image = rw.loadImageFromStorage();
         Glide.with(this)
                 .asBitmap()
-                .load(toLoad).apply(RequestOptions.circleCropTransform())
+                .load(image).apply(RequestOptions.circleCropTransform())
                 .into(new CustomTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
@@ -374,22 +348,43 @@ public class profileScreen extends Fragment {
                     }});
     }
 
-    private void saveImageToFileManager(Bitmap image,String ImageName) {
-        File pictureFile = new File(getActivity().getApplicationContext().getFilesDir(),ImageName);
-        if (pictureFile == null) {
-            return;
+
+    private void fillProfile(){
+        String username = sharedPreferences.getString(KEY_USERNAME, null);
+        String name  = sharedPreferences.getString(KEY_FULLNAME, null);
+        String contact = sharedPreferences.getString(KEY_CONTACT, null);
+        String bloodGroup = sharedPreferences.getString(KEY_BLOODGROUP, null);
+        String address = sharedPreferences.getString(KEY_ADDRESS, null);
+        String pincode = sharedPreferences.getString(KEY_PINCODE,null);
+        if(rw.isFilePresent("profile.jpg")){
+            File image = rw.loadImageFromStorage();
+            Bitmap picture = rw.loadPicture();
+            profilePhoto.setImageBitmap(picture);
+            Glide.with(this)
+                    .asBitmap()
+                    .load(image).apply(RequestOptions.circleCropTransform())
+                    .into(new CustomTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            Drawable d = new BitmapDrawable(getResources(), resource);
+                        }
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder){
+                        }});
         }
-        try {
-            FileOutputStream fos = new FileOutputStream(pictureFile);
-            image.compress(Bitmap.CompressFormat.JPEG, 30, fos);
-            fos.close();
-        } catch (FileNotFoundException e) {
-
-        } catch (IOException e) {
-
-        }catch (NullPointerException e){
-
+        profileScreenMainName.setText(username);
+        if(name != null)
+            profileScreenUserName.setText(name);
+        if(contact != null)
+            profileScreenContactNumber.setText(contact);
+        if(bloodGroup != null)
+            profileScreenBloodGroup.setText(bloodGroup);
+        if(locationHandler.isGPSEnabled()){
+            progressBar.setVisibility(View.VISIBLE);
+            getCurrentLocation();
         }
+        else
+            locationHandler.turnOnGPS();
     }
 
 

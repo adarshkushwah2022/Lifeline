@@ -1,9 +1,12 @@
 package com.example.mcproject;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -41,7 +44,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -75,6 +86,8 @@ public class Plasma_Donation extends Fragment implements AdapterView.OnItemSelec
     Spinner plasmaDonationBloodGroupSpinner;
     String current_blood_group="A";
     public static String[] bloodGroupArray = {"A", "B", "AB", "O"};
+    AlertDialog.Builder builder;
+    private String time_path = "time_data_plasma.txt";
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -127,7 +140,7 @@ public class Plasma_Donation extends Fragment implements AdapterView.OnItemSelec
         quantity = view.findViewById(R.id.plasmaDonationQuantity);
         city = view.findViewById(R.id.plasmaDonationCity);
         email = view.findViewById(R.id.plasmaDonationEmail);
-
+        builder = new AlertDialog.Builder(getContext());
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_spinner_item,bloodGroupArray);
 
@@ -166,10 +179,55 @@ public class Plasma_Donation extends Fragment implements AdapterView.OnItemSelec
                 email.setText("");
             }
         });
+        File dir = getActivity().getFilesDir();
+        File file = new File(dir, time_path);
+        if (file.exists()) {
+            String stored_time = readTimeData();
+            String cur_timestamp = getCurrentTimeStamp();
+            long diff_time = findDifference(cur_timestamp, stored_time)[0];
+            long diff_min = findDifference(cur_timestamp, stored_time)[1];
+            long diff_days = findDifference(cur_timestamp, stored_time)[2];
+            Log.d("TAG", "onCreateView: " + diff_min + " " + diff_days);
+            if (diff_days == 0 && diff_min <= 30) {
+                submitBtn.setEnabled(false);
+                submitBtn.setBackgroundColor(Color.GRAY);
+                builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
 
+                //Setting message manually and performing action on button click
+                builder.setMessage("User has already sent a request for plasma donation, Kindly try to submit another request after " + (30 - diff_min) + " mins. Do you want to close this application ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                getActivity().finish();
+                                Toast.makeText(getContext(), "You have pressed YES",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //  Action for 'NO' Button
+                                dialog.cancel();
+                                Toast.makeText(getContext(), "You have pressed NO",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("Plasma Request Form");
+                alert.show();
+            } else {
+                submitBtn.setEnabled(true);
+                submitBtn.setBackgroundResource(R.drawable.background_button1);
+            }
+        }
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Date mDate = new Date();
+                String timestamp2 = getCurrentTimeStamp();
+                saveTime(timestamp2);
+                Log.d("TAG", "onClick: " + timestamp2);
                 if(!validate()){
                     return;
                 }
@@ -215,6 +273,9 @@ public class Plasma_Donation extends Fragment implements AdapterView.OnItemSelec
 
                     });
                 }
+                Toast.makeText(getContext(),"Notification Successfully Sent to "+nearestUsers.size()+" donors within 20 KM distance from you!!", Toast.LENGTH_LONG).show();
+                submitBtn.setEnabled(false);
+                submitBtn.setBackgroundColor(Color.GRAY);
             }
         });
 
@@ -287,7 +348,6 @@ public class Plasma_Donation extends Fragment implements AdapterView.OnItemSelec
         String name_t = name.getText().toString();
         String mobile_t = mobileNo.getText().toString();
         String quantity_t = quantity.getText().toString();
-        Double latitude=0.0, longitude=0.0;
         String userID;
 
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
@@ -420,5 +480,68 @@ public class Plasma_Donation extends Fragment implements AdapterView.OnItemSelec
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+    private String readTimeData() {
+        String Time_Path = time_path;
+        String result = "";
+        try {
+            FileInputStream fin = getContext().openFileInput(Time_Path);
+            int a;
+            StringBuilder output = new StringBuilder();
+            while ((a = fin.read()) != -1) {
+                output.append((char) a);
+            }
+            result = output.toString();
+            fin.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+
+    private void saveTime(String temp) {
+        try {
+            FileOutputStream fos = getContext().openFileOutput(time_path, Context.MODE_PRIVATE);
+            String data = temp;
+            fos.write(data.getBytes());
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public static String getCurrentTimeStamp() {
+        return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+    }
+
+    static long[]
+    findDifference(String start_date,
+                   String end_date) {
+        long difference_In_Time[]={0,0,0};
+        SimpleDateFormat sdf
+                = new SimpleDateFormat(
+                "dd-MM-yyyy HH:mm:ss");
+        try {
+
+
+            Date d1 = sdf.parse(start_date);
+            Date d2 = sdf.parse(end_date);
+
+            difference_In_Time[0]
+                    = d1.getTime() - d2.getTime();
+            difference_In_Time[1]
+                    = (difference_In_Time[0] / (1000 * 60)) % 60;
+            difference_In_Time[2]= (difference_In_Time[0] / (1000 * 60 * 60 * 24)) % 365;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return difference_In_Time;
+    }
+
 
 }

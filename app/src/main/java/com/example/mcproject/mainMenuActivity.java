@@ -46,12 +46,6 @@ public class mainMenuActivity extends AppCompatActivity {
         locationHandler = new CustomLocationHandler(this);
         Boolean tempb = getIntent().getBooleanExtra("callFromNotification", false);
         Log.d("GG", "onCreate: "+tempb);
-        if(tempb != false) {
-            generatenotificationListFragment();
-        }
-        else{
-            getSupportFragmentManager().beginTransaction().replace(R.id.mainMenuContainer,new homeScreen()).commit();
-        }
 
         UpdateToken();
 
@@ -104,13 +98,22 @@ public class mainMenuActivity extends AppCompatActivity {
                 }
             }
         });
+
+        if(tempb != false) {
+            meowBottomNavigation.show(3,true);
+            generatenotificationListFragment();
+        }
+        else{
+            meowBottomNavigation.show(1,true);
+            getSupportFragmentManager().beginTransaction().replace(R.id.mainMenuContainer,new homeScreen()).commit();
+        }
+
         meowBottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
             @Override
             public void onReselectItem(MeowBottomNavigation.Model item) {
                 Toast.makeText(getApplicationContext(), "Already Pressed", Toast.LENGTH_SHORT).show();
             }
         });
-        meowBottomNavigation.show(1,true);
     }
 
     @Override

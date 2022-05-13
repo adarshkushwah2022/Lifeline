@@ -50,7 +50,7 @@
     <string name="blood_group">Blood group</string>
     <string name="enter_your_city">Enter your city</string>
     <string name="quantity">Quantity</string>
-    <string name="enter_the_quantity">Enter the quantity</string>
+    <string name="enter_the_quantity">Enter quantity in Units</string>
     <string name="city">City</string>
     <string name="mobile">Mobile</string>
     <string name="enter_your_mobile_number">Enter your mobile number</string>
