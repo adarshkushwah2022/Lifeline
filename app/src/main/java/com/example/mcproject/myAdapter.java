@@ -74,7 +74,7 @@ public class  myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
     @Override
     public void onBindViewHolder(@NonNull myAdapter.holder holder, int position) {
         holder.userName.setText("Patient Name:   "+recievedNotificationsList.get(position).getUserName());
-        holder.userNeed.setText(recievedNotificationsList.get(position).getRequirement());
+        holder.userNeed.setText(recievedNotificationsList.get(position).getRequirement()+"\nQuantity: "+recievedNotificationsList.get(position).getQuantity());
         holder.userTime.setText(recievedNotificationsList.get(position).getCurrentTime());
 
         userID = recievedNotificationsList.get(position).getUserID();
@@ -103,6 +103,7 @@ public class  myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
                 String requirement = recievedNotificationsList.get(position).getRequirement();
                 String bloodGroup = recievedNotificationsList.get(position).getBloodGroup();
                 String time = recievedNotificationsList.get(position).getCurrentTime();
+                String quant = recievedNotificationsList.get(position).getQuantity();
 
 
 //                Bundle d = new Bundle();
@@ -116,6 +117,7 @@ public class  myAdapter extends RecyclerView.Adapter<myAdapter.holder> {
                 i.putExtra("requirement",requirement);
                 i.putExtra("bloodGroup",bloodGroup);
                 i.putExtra("time",time);
+                i.putExtra("quantity",quant);
                 context.startActivity(i);
             }
         });

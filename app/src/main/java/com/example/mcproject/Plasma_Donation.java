@@ -349,7 +349,7 @@ public class Plasma_Donation extends Fragment implements AdapterView.OnItemSelec
         String mobile_t = mobileNo.getText().toString();
         String quantity_t = quantity.getText().toString();
         String userID;
-
+        quantity_t = quantity_t + " Units";
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         userID = firebaseUser.getUid();
 

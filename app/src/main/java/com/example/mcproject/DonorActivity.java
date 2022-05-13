@@ -15,7 +15,7 @@ import com.airbnb.lottie.LottieAnimationView;
 public class DonorActivity extends AppCompatActivity {
     LottieAnimationView proceedToLiveLocationButton;
     Button callButton;
-    TextView name, requirement, time, bloodGroup, mobile;
+    TextView name, requirement, time, bloodGroup, mobile, quantity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +27,7 @@ public class DonorActivity extends AppCompatActivity {
         String requirement1 = getIntent().getStringExtra("requirement");
         String bloodGroup1 = getIntent().getStringExtra("bloodGroup");
         String time1 = getIntent().getStringExtra("time");
+        String quant = getIntent().getStringExtra("quantity");
 
 
         Toast.makeText(this, ""+patientLatitude+" : "+patientLongitude, Toast.LENGTH_SHORT).show();
@@ -37,12 +38,14 @@ public class DonorActivity extends AppCompatActivity {
         bloodGroup = findViewById(R.id.textView17);
         mobile = findViewById(R.id.textView19);
         callButton =findViewById(R.id.button5);
+        quantity =findViewById(R.id.textView78);
 
         name.setText(name1);
         mobile.setText(mobile1);
         requirement.setText(requirement1);
         bloodGroup.setText(bloodGroup1);
         time.setText(time1);
+        quantity.setText(quant);
 
         proceedToLiveLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override

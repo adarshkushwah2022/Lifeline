@@ -34,7 +34,7 @@
             android:text="Map Visualization"
             android:textAlignment="center"
             android:textColor="#0A0A0A"
-            android:textSize="36sp" />
+            android:textSize="24sp" />
     </LinearLayout>
 
     <fragment

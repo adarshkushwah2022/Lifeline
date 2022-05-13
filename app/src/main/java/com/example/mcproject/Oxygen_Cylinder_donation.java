@@ -333,6 +333,7 @@ public class Oxygen_Cylinder_donation extends Fragment {
         String mobile_t = mobileNo.getText().toString();
         String quantity_t = quantity.getText().toString();
         String userID;
+        quantity_t = quantity_t + " Liters";
 
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         userID = firebaseUser.getUid();
