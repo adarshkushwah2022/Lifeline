@@ -30,7 +30,8 @@ A notification is sent to the nearby users for helping the patient when in need.
 • The application can be further extended to other use cases such as booking an appointment with the doctor, delivery of medicines at the required location.
 
 ## Contribution
-• **Akash Rawat**, **Shubham Rana**: Send notification to the users within the defined radius, sending the patient’s details by fetching via database updating the request by the receiver if he could help or not, Live covid statistics, UI of the register and login pages, Covid symptoms test activity to check if the user has to go for RT PCR or not, form validation.\
+• **[Akash Rawat](https://github.com/akashrwt7)**, **[Shubham Rana](https://github.com/rana11shubham)**: Send notification to the users within the defined radius, sending the patient’s details by fetching via database updating the request by the receiver if he could help or not, Live covid statistics, UI of the register and login pages, Covid symptoms test activity to check if the user has to go for RT PCR or not, form validation.\
 • **Dhiraj Jain**: Register/login form validation, Database for the user profile, firebase integration, GPS integration, all form validations.\
-• **Adarsh Singh Kushwah**, **Charisha Phirani**: User profile page, home screen, bottom menu for the home screen, forms for various functionalities such as blood and plasma donation, tracking the live location of the donor to receiver and directing the activity to google maps, developers details.
+• **[Adarsh Singh Kushwah](https://github.com/adarshkushwah21111)**, **[Charisha Phirani](https://github.com/Cp21117)**: User profile page, home screen, bottom menu for the home screen, forms for various functionalities such as blood and plasma donation, tracking the live location of the donor to receiver and directing the activity to google maps, developers details.
+
 
