@@ -35,3 +35,4 @@ A notification is sent to the nearby users for helping the patient when in need.
 • **[Adarsh Singh Kushwah](https://github.com/adarshkushwah21111)**, **[Charisha Phirani](https://github.com/Cp21117)**: User profile page, home screen, bottom menu for the home screen, forms for various functionalities such as blood and plasma donation, tracking the live location of the donor to receiver and directing the activity to google maps, developers details.
 
 
+
